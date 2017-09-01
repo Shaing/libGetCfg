@@ -31,7 +31,7 @@ LIB_EXPORT unsigned int get_cfg(const char *cfilePath, char *result, const char 
 			
 			if(Buf.size() == 0)
 				continue;
-			else if(Buf[0] == '[')
+			else if(Buf[0] == '[' || Buf[0] == ';' || Buf[0] == '#')
 				continue;
 
 			//std::cout << Buf << std::endl;	
@@ -101,6 +101,9 @@ LIB_EXPORT unsigned int get_cfg_ByTag(const char* cfilePath, char *result, const
 			
 			if(Buf.size() == 0)
 				continue;
+			else if(Buf[0] == ';' || Buf[0] == '#')
+				continue;
+
 			else if(Buf[0] == '[' || tagChk == true)
 			{
 				//std::cout << Buf << std::endl;
@@ -178,7 +181,7 @@ LIB_EXPORT unsigned int get_path(const char *cfilePath, char *result, const char
 
 		if(Buf.size() == 0)
 			continue;
-		else if(Buf[0] == '[')
+		else if(Buf[0] == '[' || Buf[0] == ';' || Buf[0] == '#')
 			continue;
 
 		//std::cout << Buf << std::endl;	
@@ -248,6 +251,9 @@ LIB_EXPORT unsigned int get_path_ByTag(const char* cfilePath, char *result, cons
 
 		if(Buf.size() == 0)
 			continue;
+		else if(Buf[0] == ';' || Buf[0] == '#')
+			continue;
+
 		else if(Buf[0] == '[' || tagChk == true)
 		{
 			//std::cout << Buf << std::endl;
