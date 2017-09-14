@@ -1,6 +1,7 @@
 #include "lib_get_cfg.h"
 #include <iostream>
 #include <fstream>
+#include <string.h>
 
 LIB_EXPORT unsigned int get_cfg(const char *cfilePath, char *result, const char *ckey)
 {
