@@ -21,6 +21,13 @@
 #define	LOG_SN_CHANGE	"LOG_SN_CHANGE"
 #define	LOG_SN_CHECK	"LOG_SN_CHECK"
 #define PACK_MP_SMI "PACK_MP_SMI"
+
+/* ===================================================== */
+#define TAG_SATA "SATA"
+#define	SATA_MP	"SATA_MP"
+#define SATA_DIO "DIO"
+#define ST_DIR "ST_DIR"
+#define ST_EXE "ST_EXE"
 /* ===================================================== */
 #define TAG_PACK "PACK"
 #define PACK_EXE "PACK_EXE"
@@ -62,13 +69,13 @@
 #define UPC "UPC"
 #define MV_CHK_UPC "MV_CHK_UPC"
 #define ANG_EC "AVG_EC"
-#define ECC "ECC"
+#define ECC_CNT "ECC"
 #define MAX_ECC "MAX_ECC"
 #define RETRY_CNT "RETRY_CNT"
 #define TAG_LOG "LOG"
 #define LOG_PATH "LogPath"
 #define RTY_FIND_CNT "RetryFindCount"
-#define CRC "CRC_CNT"
+#define CRC_CNT "CRC_CNT"
 #define INNOURL "PSC_URL"
 
 
