@@ -4,7 +4,7 @@ SRCS            := ../src/lib_get_cfg.cpp
 OBJS            := $(SRCS:.cpp=.o)
 LIBS			:= 
 TARGET          := lib_get_cfg.a
-XINSTALL		:= ../../../Factory/iPacker
+XINSTALL		:= ../../../Factory/iPacker/$(TARGET)
 
 CFLAGS          := -Wall -I ../src/include 
 
@@ -24,6 +24,7 @@ $(TARGET): $(OBJS)
 #	gcc -shared -o DLL_file OBJ_files -Wl,--kill-at,--output-def,DEF_file
 	$(Q)ar rcs $@ $(OBJS) $(LDFLAGS)
 #	$(Q)strip $(TARGET)
+	$(Q)echo "  Copy $(TARGET) to $(XINSTALL)"
 	$(Q)cp $(TARGET) $(XINSTALL)
 
 	
@@ -37,5 +38,5 @@ clean distclean:
 	$(Q)$(CC) $(CFLAGS) -M ../src/lib_get_cfg.cpp > $@
 
 ifeq (.depend, $(wildcard .depend))
-    include .depend
+	include .depend
 endif

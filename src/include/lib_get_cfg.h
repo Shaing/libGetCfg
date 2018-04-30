@@ -1,6 +1,6 @@
 #ifndef __LIB_GET_PATH_H__  
 #define __LIB_GET_PATH_H__
-#include <string>
+#define GCFGVER "v0.0.2"
 
 #define	PATH_INI ".\\path.ini"
 #define	J_INI	".\\jsetting.ini"
@@ -77,7 +77,6 @@
 #define RTY_FIND_CNT "RetryFindCount"
 #define CRC_CNT "CRC_CNT"
 #define INNOURL "PSC_URL"
-
 
 #define LIB_EXPORT	__declspec(dllexport)
 
