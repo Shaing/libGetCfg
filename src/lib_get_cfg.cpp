@@ -4,7 +4,7 @@
 #include <string>
 #include <string.h>
 
-unsigned int get_cfg(const char *cfilePath, char *result, const char *ckey)
+unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey)
 {
 		std::string 	Buf, Buf_chk, filePath(cfilePath), key(ckey);
 		std::size_t		found = 0, found_chk = 0, errorCode = CANNT_FIND;
@@ -69,7 +69,7 @@ unsigned int get_cfg(const char *cfilePath, char *result, const char *ckey)
 		return errorCode;	 
 }
 
-unsigned int get_cfg_ByTag(const char* cfilePath, char *result, const char* ckey, const char* ctag)
+unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag)
 {
 	std::string 	Buf, Buf_chk, filePath(cfilePath), key(ckey), tag(ctag);
 	std::size_t		found = 0, found_chk = 0, errorCode = CANNT_FIND;
@@ -142,7 +142,7 @@ unsigned int get_cfg_ByTag(const char* cfilePath, char *result, const char* ckey
 	return errorCode;	 
 }
 
-unsigned int get_path(const char *cfilePath, char *result, const char *ckey)
+unsigned int get_path(const char* cfilePath, char* result, const char* ckey)
 {
 	std::string 	Buf, Buf_chk, filePath(cfilePath), key(ckey);
 	std::size_t		found = 0, found_chk = 0, errorCode = CANNT_FIND;
@@ -207,7 +207,7 @@ unsigned int get_path(const char *cfilePath, char *result, const char *ckey)
 	return errorCode;
 }
 
-unsigned int get_path_ByTag(const char* cfilePath, char *result, const char* ckey, const char* ctag)
+unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag)
 {
 	std::string 	Buf, Buf_chk, filePath(cfilePath), key(ckey), tag(ctag);
 	std::size_t		found = 0, found_chk = 0, errorCode = CANNT_FIND;

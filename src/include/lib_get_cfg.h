@@ -95,10 +95,10 @@ enum
 	extern "C" 
 	{
 #endif
-		LIB_EXPORT unsigned int get_cfg(const char* cfilePath, char *result, const char* ckey);
-		LIB_EXPORT unsigned int get_cfg_ByTag(const char* cfilePath, char *result, const char* ckey, const char* ctag);
-		LIB_EXPORT unsigned int get_path(const char* cfilePath, char *result, const char* ckey); //keep old for old proj
-		LIB_EXPORT unsigned int get_path_ByTag(const char* cfilePath, char *result, const char* ckey, const char* ctag); //keep old for old proj
+		LIB_EXPORT unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey);
+		LIB_EXPORT unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag);
+		LIB_EXPORT unsigned int get_path(const char* cfilePath, char* result, const char* ckey); //keep old for old proj
+		LIB_EXPORT unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag); //keep old for old proj
 #ifdef __cplusplus
 	}
 #endif
