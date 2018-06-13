@@ -91,6 +91,7 @@ enum
 
 /* ===================================================== */
 
+#ifdef _WIN32
 #ifdef __cplusplus
 	extern "C" 
 	{
@@ -101,6 +102,12 @@ enum
 		LIB_EXPORT unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag); //keep old for old proj
 #ifdef __cplusplus
 	}
+#endif
+#else
+	unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey);
+	unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag);
+	unsigned int get_path(const char* cfilePath, char* result, const char* ckey); //keep old for old proj
+	unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag); //keep old for old proj
 #endif
 
 #endif //__LIB_GET_PATH_H__
