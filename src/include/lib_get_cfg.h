@@ -68,7 +68,7 @@
 #define E_LTB "ELTB"
 #define UPC "UPC"
 #define MV_CHK_UPC "MV_CHK_UPC"
-#define ANG_EC "AVG_EC"
+#define AVG_EC "AVG_EC"
 #define ECC_CNT "ECC"
 #define MAX_ECC "MAX_ECC"
 #define RETRY_CNT "RETRY_CNT"
