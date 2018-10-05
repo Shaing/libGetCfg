@@ -1,0 +1,2 @@
+- this is for linux env testing(ubuntu 16.04)
+- cfg.ini is text format of linux format, if format by windows format, the testing apis(libGetCfg) could return "CANNT_FIND"(error code: 4)

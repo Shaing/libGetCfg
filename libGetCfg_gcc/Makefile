@@ -5,6 +5,7 @@ OBJS            := $(SRCS:.cpp=.o)
 LIBS			:= 
 TARGET          := lib_get_cfg.a
 XINSTALL		:= ../../../Factory/iPacker/$(TARGET)
+XINSTALL_linux	:= ../example_makefile/$(TARGET)
 
 CFLAGS          := -Wall -I ../src/include 
 
@@ -24,8 +25,9 @@ $(TARGET): $(OBJS)
 #	gcc -shared -o DLL_file OBJ_files -Wl,--kill-at,--output-def,DEF_file
 	$(Q)ar rcs $@ $(OBJS) $(LDFLAGS)
 #	$(Q)strip $(TARGET)
-	$(Q)echo "  Copy $(TARGET) to $(XINSTALL)"
+	$(Q)echo "  Copy $(TARGET) to $(XINSTALL)  $(XINSTALL_linux)"
 	$(Q)cp $(TARGET) $(XINSTALL)
+	$(Q)cp $(TARGET) $(XINSTALL_linux)
 
 	
 clean distclean:

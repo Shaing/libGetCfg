@@ -2,7 +2,14 @@
 #define __LIB_GET_PATH_H__
 #define GCFGVER "v0.0.2"
 
+#ifdef _WIN32
 #define	PATH_INI ".\\path.ini"
+#define SPLIT "\\"
+#else
+#define	PATH_INI "./lpath.ini"
+#define SPLIT "/"
+#endif
+
 #define	J_INI	".\\jsetting.ini"
 #define	CONFIG_INI ".\\qcheck_setting.ini"
 /* ===================================================== */

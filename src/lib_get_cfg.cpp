@@ -71,13 +71,14 @@ unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey)
 
 unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag)
 {
+	using std::cout;
+	using std::endl;
 	std::string 	Buf, Buf_chk, filePath(cfilePath), key(ckey), tag(ctag);
 	std::size_t		found = 0, found_chk = 0, errorCode = CANNT_FIND;
 	std::fstream 	readPath;
 	bool tagChk = false;
 
 	tag = "[" + tag + "]";
-	
 	readPath.open(filePath.c_str(), std::ios::in);
 	if(!readPath)
 		 return OPEN_FILE_ERROR;
@@ -94,7 +95,7 @@ unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey
 			errorCode = READ_FAIL;
 			break;
 		}
-		
+
 		if(Buf.size() == 0)	continue;
 		else if(Buf[0] == ';' || Buf[0] == '#')	continue;
 		else if(Buf[0] == '[' || tagChk == true)
@@ -222,7 +223,6 @@ unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* cke
 
 	while(getline(readPath, Buf), !readPath.eof())
 	{
-
 		if(readPath.bad())
 		{
 			errorCode = FILE_BAD;
