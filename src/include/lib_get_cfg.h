@@ -1,6 +1,6 @@
 #ifndef __LIB_GET_PATH_H__  
 #define __LIB_GET_PATH_H__
-#define GCFGVER "v0.0.2"
+#define GCFGVER "v0.1.0"
 
 #ifdef _WIN32
 #define	PATH_INI ".\\path.ini"
@@ -94,6 +94,7 @@ enum
 	READ_FAIL,
 	OPEN_FILE_ERROR,
 	CANNT_FIND,
+	WRITE_FAIL,
 };
 
 /* ===================================================== */
@@ -107,6 +108,7 @@ enum
 		LIB_EXPORT unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag);
 		LIB_EXPORT unsigned int get_path(const char* cfilePath, char* result, const char* ckey); //keep old for old proj
 		LIB_EXPORT unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag); //keep old for old proj
+		LIB_EXPORT unsigned int write_cfg_ByTag(const char* cfilePath, const char* value, const char* ckey, const char* ctag);
 #ifdef __cplusplus
 	}
 #endif
@@ -115,6 +117,11 @@ enum
 	unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag);
 	unsigned int get_path(const char* cfilePath, char* result, const char* ckey); //keep old for old proj
 	unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* ckey, const char* ctag); //keep old for old proj
+	unsigned int write_cfg_ByTag(const char* cfilePath, const char* value, const char* ckey, const char* ctag);
+	namespace ICFG
+	{
+		unsigned int WritePrivateProfileString(const char* tag, const char* key, const char* value, const char* path);
+	}
 #endif
 
 #endif //__LIB_GET_PATH_H__

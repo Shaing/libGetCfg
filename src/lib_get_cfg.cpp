@@ -1,8 +1,13 @@
 #include "lib_get_cfg.h"
 #include <iostream>
+#include <ostream>
 #include <fstream>
 #include <string>
 #include <string.h>
+#include <vector>
+#include <set>
+#include <map>
+#include <algorithm>
 
 unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey)
 {
@@ -275,9 +280,154 @@ unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* cke
 		}
 		continue;
 	}
-
 	readPath.clear();
 	readPath.close();
 	return errorCode;
 }
 
+unsigned int write_cfg_ByTag(const char* cfilePath, const char* value, const char* ckey, const char* ctag)
+{
+	using std::cout;
+	using std::endl;
+	using std::string;
+
+	string 	Buf, Buf_key_chk, filePath(cfilePath), key(ckey), tag(ctag), value_(value), storetag, oldkey, oldvalue;
+	std::size_t		found = 0, found_equal_chk = 0, errorCode = CANNT_FIND;
+	std::fstream 	readPath;
+	std::fstream 	writePath;
+	bool tagChk = false;
+	bool keyChk = false;
+
+	std::map<string,std::vector<std::pair<string,string>>> IniAllValues;
+	std::set<string> CollectAllTag;
+
+	tag = "[" + tag + "]";
+
+	readPath.open(filePath.c_str(), std::ios::in);
+
+	if(!readPath)
+	{
+		readPath.open(filePath.c_str(), std::ios::app);
+		if(!readPath)
+			return OPEN_FILE_ERROR;
+	}
+	
+	while(getline(readPath, Buf), !readPath.eof())
+	{
+		if(readPath.bad())
+		{
+			errorCode = FILE_BAD;
+			break;
+		}						
+		else if(readPath.fail())
+		{
+			errorCode = READ_FAIL;
+			break;
+		}
+
+
+		if(Buf.size() == 0)	
+			continue;
+		else if(Buf[0] == ';' || Buf[0] == '#' )	
+			continue;
+		else if(Buf[0] == '[' || tagChk == true)
+		{
+			if(Buf[0] == '[')
+			{
+				storetag.clear();
+				storetag = Buf;
+				CollectAllTag.insert(Buf);
+				tagChk = true;
+			}
+			else if(tagChk == true && Buf[0] != '[')
+			{   
+				found_equal_chk = Buf.find("=");
+				if (found_equal_chk == std::string::npos)
+					continue;	
+
+				Buf_key_chk = Buf.substr(0, found_equal_chk);
+				found = Buf.find(key);
+
+				if(found != std::string::npos && storetag == tag && Buf_key_chk.size() == key.size())
+				{
+					IniAllValues[storetag].push_back(std::pair<string,string>(key, value_));
+					keyChk = true;
+				}
+				else
+				{
+					oldkey = Buf.substr(0, found_equal_chk);
+					oldvalue = Buf.substr(found_equal_chk + 1);
+					IniAllValues[storetag].push_back(std::pair<string,string>(oldkey, oldvalue));
+				}
+			}
+		}
+		continue;	
+	}
+
+	readPath.clear();
+	readPath.close();
+
+	// cout << "=before added=" << endl;
+	// for (auto x: IniAllValues)
+	// {
+	// 	for(auto i: x.second)
+	// 	{
+	// 		cout << i.first << " = " << i.second << "\n";
+	// 	}
+	// }
+
+	if (!keyChk)
+	{
+		IniAllValues[tag].push_back(std::pair<string,string>(key, value_));
+		CollectAllTag.insert(tag);
+	}
+
+	// for (auto x: IniAllValues)
+	// {
+	// 	for(auto i: x.second)
+	// 	{
+	// 		cout << i.first << " = " << i.second << "\n";
+	// 	}
+	// }
+
+	if(IniAllValues.size() == 0)
+	{
+		errorCode = WRITE_FAIL;
+	}
+	else
+	{
+		writePath.open(filePath.c_str(), std::ios::out | std::ios::trunc);
+
+		if(!writePath)
+			 return OPEN_FILE_ERROR;
+
+		for(auto i = CollectAllTag.begin(); i != CollectAllTag.end(); ++i)
+		{
+			writePath << i->c_str() << "\n";
+			for(auto j = 0; j < IniAllValues[*i].size(); ++j)
+    		{
+				writePath << IniAllValues[*i][j].first + "=" + IniAllValues[*i][j].second + "\n";
+    		}
+		}
+
+		// cout << "=after=" << endl;
+		// for (auto x: IniAllValues)
+		// {
+		// 	for(auto i: x.second)
+		// 	{
+		// 		cout << i.first << " = " << i.second << "\n";
+		// 	}
+		// }
+
+		writePath.clear();
+		writePath.close();
+		errorCode = SUCCESSFUL;
+	}
+
+	return errorCode;
+}
+
+unsigned int ICFG::WritePrivateProfileString(const char* tag, const char* key, const char* value, const char* path)
+{
+	return write_cfg_ByTag(path, value, key, tag);
+}

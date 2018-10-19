@@ -5,7 +5,7 @@ OBJS            := $(SRCS:.cpp=.o)
 TARGET          := iPacker_mk_exp.exe
 LIBS			:= lib_get_cfg.a
 
-CFLAGS          += -Wall -I ../src/include
+CFLAGS          += -Wall -I ../src/include -std=c++11
 LDFLAGS			+= $(LIBS)
 
 .PHONY: all clean distclean
