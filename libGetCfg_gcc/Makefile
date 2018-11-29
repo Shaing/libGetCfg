@@ -2,7 +2,7 @@ Q               := @
 CC              := g++
 SRCS            := ../src/lib_get_cfg.cpp
 OBJS            := $(SRCS:.cpp=.o)
-LIBS		:= 
+LIBS			:= 
 TARGET          := lib_get_cfg.a
 XINSTALL		:= ../../../factory/iPacker/$(TARGET)
 XINSTALL_linux	:= ../example_makefile/$(TARGET)

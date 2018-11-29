@@ -2,12 +2,20 @@
 #include <iostream>
 #include <ostream>
 #include <fstream>
-#include <string>
 #include <string.h>
 #include <vector>
 #include <set>
 #include <map>
 #include <algorithm>
+#include <string>
+
+namespace{
+void dataClean(std::string& str)
+{
+	if (str.find_last_of(0x0D) != std::string::npos)
+		str = str.substr(0, str.find_last_of(0x0D));
+}
+}
 
 unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey)
 {
@@ -19,6 +27,8 @@ unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey)
 		//std::cout << "getPath:" << result << std::endl;
 		//std::cout << "key:" << key << std::endl;
 		
+		dataClean(key);
+
 		readPath.open(filePath.c_str(), std::ios::in);
 		if(!readPath)
 			 return OPEN_FILE_ERROR;
@@ -36,6 +46,8 @@ unsigned int get_cfg(const char* cfilePath, char* result, const char* ckey)
 				break;
 			}
 			
+			dataClean(Buf);
+
 			if(Buf.size() == 0)
 				continue;
 			else if(Buf[0] == '[' || Buf[0] == ';' || Buf[0] == '#')
@@ -84,6 +96,8 @@ unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey
 	bool tagChk = false;
 
 	tag = "[" + tag + "]";
+	dataClean(key);
+
 	readPath.open(filePath.c_str(), std::ios::in);
 	if(!readPath)
 		 return OPEN_FILE_ERROR;
@@ -100,6 +114,8 @@ unsigned int get_cfg_ByTag(const char* cfilePath, char* result, const char* ckey
 			errorCode = READ_FAIL;
 			break;
 		}
+
+		dataClean(Buf);
 
 		if(Buf.size() == 0)	continue;
 		else if(Buf[0] == ';' || Buf[0] == '#')	continue;
@@ -158,6 +174,8 @@ unsigned int get_path(const char* cfilePath, char* result, const char* ckey)
 	//std::cout << "getPath:" << result << std::endl;
 	//std::cout << "key:" << key << std::endl;
 
+	dataClean(key);
+
 	readPath.open(filePath.c_str(), std::ios::in);
 	if(!readPath)
 		return OPEN_FILE_ERROR;
@@ -179,6 +197,8 @@ unsigned int get_path(const char* cfilePath, char* result, const char* ckey)
 			continue;
 		else if(Buf[0] == '[' || Buf[0] == ';' || Buf[0] == '#')
 			continue;
+
+		dataClean(Buf);
 
 		//std::cout << Buf << std::endl;	
 		found = Buf.find(key);
@@ -221,6 +241,7 @@ unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* cke
 	bool tagChk = false;
 
 	tag = "[" + tag + "]";
+	dataClean(key);
 
 	readPath.open(filePath.c_str(), std::ios::in);
 	if(!readPath)
@@ -238,6 +259,8 @@ unsigned int get_path_ByTag(const char* cfilePath, char* result, const char* cke
 			errorCode = READ_FAIL;
 			break;
 		}
+
+		dataClean(Buf);
 
 		if(Buf.size() == 0)	continue;
 		else if(Buf[0] == ';' || Buf[0] == '#')	continue;
@@ -302,6 +325,8 @@ unsigned int write_cfg_ByTag(const char* cfilePath, const char* value, const cha
 	std::set<string> CollectAllTag;
 
 	tag = "[" + tag + "]";
+	dataClean(key);
+	dataClean(value_);
 
 	readPath.open(filePath.c_str(), std::ios::in);
 
@@ -325,6 +350,7 @@ unsigned int write_cfg_ByTag(const char* cfilePath, const char* value, const cha
 			break;
 		}
 
+		dataClean(Buf);
 
 		if(Buf.size() == 0)	
 			continue;
@@ -427,7 +453,9 @@ unsigned int write_cfg_ByTag(const char* cfilePath, const char* value, const cha
 	return errorCode;
 }
 
+#ifndef _WIN32
 unsigned int ICFG::WritePrivateProfileString(const char* tag, const char* key, const char* value, const char* path)
 {
 	return write_cfg_ByTag(path, value, key, tag);
 }
+#endif

@@ -28,5 +28,9 @@ cout << buf << endl;
 - windows 7/10
 - ubuntu 16.04
 
+# Release note
+- v0.1.1
+> fixed on linux can't read windows file(0x0d 0x0a), add dataClean() in cpp as private function.
+
 
 

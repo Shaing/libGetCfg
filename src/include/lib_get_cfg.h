@@ -1,12 +1,12 @@
 #ifndef __LIB_GET_PATH_H__  
 #define __LIB_GET_PATH_H__
-#define GCFGVER "v0.1.0"
+#define GCFGVER "v0.1.1"
 
 #ifdef _WIN32
 #define	PATH_INI ".\\path.ini"
 #define SPLIT "\\"
 #else
-#define	PATH_INI "./lpath.ini"
+#define	PATH_INI "./path.ini"
 #define SPLIT "/"
 #endif
 
@@ -15,8 +15,12 @@
 /* ===================================================== */
 #define TAG_PUBLIC "PUBLIC"
 #define CSV_MV	"CSV_MV"
+#define CSV_MV_M61	"CSV_MV_M61"
+#define CSV_MV_M71	"CSV_MV_M71"
 #define CSV_JM	"CSV_JM"
 #define	FW_MV		"FW_MV"
+#define	FW_MV_M61	"FW_MV_M61"
+#define	FW_MV_M71	"FW_MV_M71"
 #define	FW_JM		"FW_JM"
 #define	CONFIG		"CONFIG"
 #define MV_FILE_FOLDER	"MV_FILE_FOLDER"
